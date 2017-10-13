@@ -1,7 +1,10 @@
 import sys
 from loki.broker.queue import Queue, RedisQueueEngine
 
-redis_engine = RedisQueueEngine('127.0.0.1',6379)
+
+host = sys.argv[1]
+port = sys.argv[2]
+redis_engine = RedisQueueEngine(host,port)
 input_queue = Queue('examples::data_consumer::input', redis_engine)
 output_queue = Queue('examples::data_consumer::output', redis_engine)
 while True:
