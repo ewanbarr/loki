@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-broker-service
+spec:
+  selector:
+    run: redis-broker 
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
