@@ -13,5 +13,6 @@ while True:
     print "Pushing: '{}' to queue '{}'".format(data,'examples::data_consumer::input')
     input_queue.lpush(data)
     ii+=1
+    sys.stdout.flush()
     time.sleep(5)
     
