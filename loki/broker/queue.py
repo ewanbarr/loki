@@ -29,10 +29,10 @@ class Queue(object):
         self.engine = engine
 
     def lpop(self, blocking=False):
-        return self.engine.lpop(self.queue_name)
+        return self.engine.lpop(self.queue_name, blocking)
 
     def rpop(self, blocking=False):
-        return self.engine.rpop(self.queue_name)
+        return self.engine.rpop(self.queue_name, blocking)
 
     def lpush(self, value):
         return self.engine.lpush(self.queue_name, value)
