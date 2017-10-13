@@ -6,13 +6,13 @@ class RedisQueueEngine(object):
 
     def lpop(self, name, blocking=False):
         if blocking:
-            return self.client.blpop(name)
+            return self.client.blpop(name)[1]
         else:
             return self.client.lpop(name)
 
     def rpop(self, name, blocking=False):
         if blocking:
-            return self.client.brpop(name)
+            return self.client.brpop(name)[1]
         else:
             return self.client.rpop(name)
 

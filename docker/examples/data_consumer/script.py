@@ -1,3 +1,4 @@
+import sys
 from loki.broker.queue import Queue, RedisQueueEngine
 
 redis_engine = RedisQueueEngine('redis',6379)
@@ -6,4 +7,6 @@ output_queue = Queue('examples::data_consumer::output', redis_engine)
 while True:
     data = input_queue.rpop(blocking=True)
     print "From input queue:",data
-    output_queue.lpush(data)
+    sys.stdout.flush()
+    output_queue.lpush('Got one')
+    
