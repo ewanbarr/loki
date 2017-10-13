@@ -4,11 +4,17 @@ class RedisQueueEngine(object):
     def __init__(self, host, port):
         self.client = redis.StrictRedis(host=host, port=port, db=0)
 
-    def lpop(self, name):
-        return self.client.lpop(name)
+    def lpop(self, name, blocking=False):
+        if blocking:
+            return self.client.blpop(name)
+        else:
+            return self.client.lpop(name)
 
-    def rpop(self, name):
-        return self.client.rpop(name)
+    def rpop(self, name, blocking=False):
+        if blocking:
+            return self.client.brpop(name)
+        else:
+            return self.client.rpop(name)
 
     def lpush(self, name, value):
         return self.client.lpush(name, value)
@@ -22,10 +28,10 @@ class Queue(object):
         self.queue_name = queue_name
         self.engine = engine
 
-    def lpop(self):
+    def lpop(self, blocking=False):
         return self.engine.lpop(self.queue_name)
 
-    def rpop(self):
+    def rpop(self, blocking=False):
         return self.engine.rpop(self.queue_name)
 
     def lpush(self, value):

@@ -6,4 +6,4 @@ RUN pip install setuptools redis && \
     python setup.py install
 
 COPY script.py script.py
-eCMD ['/usr/local/bin/python','script.py']
+CMD ["/usr/local/bin/python","script.py"]
